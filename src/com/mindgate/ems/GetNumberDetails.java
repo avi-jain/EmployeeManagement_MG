@@ -20,15 +20,15 @@ import javax.servlet.http.*;
 @WebServlet(
 		description = "fetches all the contents of the table", 
 		urlPatterns = { 
-				"/getAll"
+				"/searchNumber"
 		})
-public class GetAllDetails extends HttpServlet {
+public class GetNumberDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetAllDetails() {
+    public GetNumberDetails() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -66,7 +66,7 @@ public class GetAllDetails extends HttpServlet {
 	         // Execute SQL query
 	         Statement stmt = conn.createStatement();
 	         String sql;
-	         sql = "SELECT number, name, age, sal FROM employee_details";
+	         sql = "SELECT number, name, age, sal FROM employee_details WHERE number = ";
 	         ResultSet rs = stmt.executeQuery(sql);
 	         List<EmployeeClass> list = new ArrayList<EmployeeClass>();
 	         
@@ -82,8 +82,8 @@ public class GetAllDetails extends HttpServlet {
 	         }
 	         request.setAttribute("list",list);
 
-	         RequestDispatcher rd= request.getRequestDispatcher("displayAll.jsp");
-	         rd.include(request, response);
+	         RequestDispatcher rd= request.getRequestDispatcher("displayNumber.jsp");
+	         rd.include(request, response); // Using include instead of forward
 	         // Clean-up environment
 	         rs.close();
 	         stmt.close();
@@ -94,20 +94,7 @@ public class GetAllDetails extends HttpServlet {
 	      }catch(Exception e){
 	         //Handle errors for Class.forName
 	         e.printStackTrace();
-	      }/*finally{
-	         //finally block used to close resources
-	         try{
-	            if(stmt!=null)
-	               stmt.close();
-	         }catch(SQLException se2){
-	         }// nothing we can do
-	         try{
-	            if(conn!=null)
-	            conn.close();
-	         }catch(SQLException se){
-	            se.printStackTrace();
-	         }//end finally try
-	      } //end try*/
+	      }
 	   }
 }
 
