@@ -16,7 +16,7 @@ hr{
 <form role="form"  method = "post" action="update" name="update">
   <div class="form-group">
     <label for="num">Enter Existing ID</label>
-    <input type="text" class="form-control" id="num" autofocus required>
+    <input type="text" class="form-control" id="num" name = "num" autofocus required>
   </div>
   <div class = "line">
   <hr>

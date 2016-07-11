@@ -10,13 +10,23 @@
 </head>
 <body>
 	<table class = "table">
+        <thead>
+	      <tr>
+	         <th>ID</th>
+	         <th>Name</th>
+	         <th>Age</th>
+	         <th>Salary</th>
+	      </tr>
+   		</thead>
         <c:forEach items="${list}" var="record">
-            <tr>
-                <td>${record.ID }</td>
-                <td>${record.name }</td>
-                <td>${record.age}</td>
-                <td>${record.sal }</td>
-            </tr>
+           <tbody class = "table-hover table-striped ">
+	            <tr>
+	                <td>${record.ID }</td>
+	                <td>${record.name }</td>
+	                <td>${record.age}</td>
+	                <td>${record.sal }</td>
+	            </tr>
+            </tbody>
         </c:forEach>
     </table>
     

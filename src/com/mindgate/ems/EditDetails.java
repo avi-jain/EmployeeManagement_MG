@@ -1,34 +1,32 @@
 package com.mindgate.ems;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.*;
-import java.util.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-
-
 
 /**
- * Servlet implementation class GetAllDetails
+ * Servlet implementation class EditDetails
  */
-@WebServlet(
-		description = "fetches all the contents of the table", 
-		urlPatterns = { 
-				"/searchNumber"
-		})
-public class GetNumberDetails extends HttpServlet {
+@WebServlet("/update")
+public class EditDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetNumberDetails() {
+    public EditDetails() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,8 +42,7 @@ public class GetNumberDetails extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// JDBC driver name and database URL
-	      final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+		 final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	      final String DB_URL= "jdbc:mysql://localhost:3306/Employee_Mindgate";
 
 	      //  Database credentials
@@ -55,7 +52,10 @@ public class GetNumberDetails extends HttpServlet {
 	      // Set response content type
 	      response.setContentType("text/html");
 	      //PrintWriter out = response.getWriter();
-	      String  input = request.getParameter("num");  
+	      String input  = request.getParameter("num");
+	      //String  input = request.getParameter("num");
+	      //String  input = request.getParameter("num");
+	      //String  input = request.getParameter("num");
 	      try{
 	         // Register JDBC driver
 	         Class.forName("com.mysql.jdbc.Driver");
@@ -65,9 +65,16 @@ public class GetNumberDetails extends HttpServlet {
 
 	         // Execute SQL query
 	         Statement stmt = conn.createStatement();
-	         String sql;
-	         sql = "SELECT number, name, age, sal FROM employee_details WHERE number = " + input;
-	         ResultSet rs = stmt.executeQuery(sql);
+	         String sql = "UPDATE employee_details" +
+	                   "SET name,age,sal WHERE number = ";
+	         stmt.executeUpdate(sql);
+
+	      	// Now extract all the records
+	      	// to see the updated records
+	         
+	         String sql2;
+	         sql2 = "SELECT number, name, age, sal FROM employee_details";
+	         ResultSet rs = stmt.executeQuery(sql2);
 	         List<EmployeeClass> list = new ArrayList<EmployeeClass>();
 	         
 	         // Extract data from result set
@@ -82,7 +89,7 @@ public class GetNumberDetails extends HttpServlet {
 	         }
 	         request.setAttribute("list",list);
 
-	         RequestDispatcher rd= request.getRequestDispatcher("displayNumber.jsp");
+	         RequestDispatcher rd= request.getRequestDispatcher("");
 	         rd.include(request, response); // Using include instead of forward
 	         // Clean-up environment
 	         rs.close();
@@ -95,6 +102,6 @@ public class GetNumberDetails extends HttpServlet {
 	         //Handle errors for Class.forName
 	         e.printStackTrace();
 	      }
-	   }
-}
+	}
 
+}

@@ -11,13 +11,23 @@
 <body>
 
     <table class = "table">
+        <thead>
+	      <tr>
+	         <th>ID</th>
+	         <th>Name</th>
+	         <th>Age</th>
+	         <th>Salary</th>
+	      </tr>
+   		</thead>
         <c:forEach items="${list}" var="record">
+            <tbody class = "table-hover table-striped ">
             <tr>
                 <td>${record.ID }</td>
                 <td>${record.name }</td>
                 <td>${record.age}</td>
                 <td>${record.sal }</td>
             </tr>
+            </tbody>
         </c:forEach>
     </table>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>

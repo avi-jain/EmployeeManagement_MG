@@ -2,13 +2,16 @@ package com.mindgate.ems;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.sql.*;
 import java.util.*;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -55,7 +58,7 @@ public class GetNameDetails extends HttpServlet {
 	      // Set response content type
 	      response.setContentType("text/html");
 	      //PrintWriter out = response.getWriter();
-	         
+	      String  input = request.getParameter("name");   
 	      try{
 	         // Register JDBC driver
 	         Class.forName("com.mysql.jdbc.Driver");
@@ -66,7 +69,7 @@ public class GetNameDetails extends HttpServlet {
 	         // Execute SQL query
 	         Statement stmt = conn.createStatement();
 	         String sql;
-	         sql = "SELECT number, name, age, sal FROM employee_details WHERE name = ";
+	         sql = "SELECT number, name, age, sal FROM employee_details WHERE name =" + input;
 	         ResultSet rs = stmt.executeQuery(sql);
 	         List<EmployeeClass> list = new ArrayList<EmployeeClass>();
 	         

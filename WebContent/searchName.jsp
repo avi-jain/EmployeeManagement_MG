@@ -14,7 +14,7 @@
 <form role="form" method = "post" action="searchName" name="searchName" >
   <div class="form-group">
     <label for="name">Enter Name </label>
-    <input type="text" class="form-control" id="name" required autofocus>
+    <input type="text" class="form-control" id="name" name = "name" required autofocus>
   </div>
   <button type="submit" class="btn btn-default">Get Details</button>
 </form>
